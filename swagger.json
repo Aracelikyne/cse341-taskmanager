@@ -12,6 +12,22 @@
       },
       "post": {
         "summary": "Create user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string", "example": "testuser123" },
+                  "email": { "type": "string", "example": "test@email.com" },
+                  "firstName": { "type": "string", "example": "John" },
+                  "lastName": { "type": "string", "example": "Doe" }
+                }
+              }
+            }
+          }
+        },
         "responses": { "201": { "description": "Created" } }
       }
     },
@@ -30,6 +46,22 @@
       },
       "put": {
         "summary": "Update a user by ID",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "email": { "type": "string" },
+                  "firstName": { "type": "string" },
+                  "lastName": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
         "responses": { "204": { "description": "No Content" } }
       },
       "delete": {
