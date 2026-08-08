@@ -15,6 +15,28 @@
         "responses": { "201": { "description": "Created" } }
       }
     },
+    "/users/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "get": {
+        "summary": "Get a single user by ID",
+        "responses": { "200": { "description": "OK" } }
+      },
+      "put": {
+        "summary": "Update a user by ID",
+        "responses": { "204": { "description": "No Content" } }
+      },
+      "delete": {
+        "summary": "Delete a user by ID",
+        "responses": { "204": { "description": "No Content" } }
+      }
+    },
     "/projects": {
       "get": {
         "summary": "Get all projects",
@@ -23,6 +45,28 @@
       "post": {
         "summary": "Create project",
         "responses": { "201": { "description": "Created" } }
+      }
+    },
+    "/projects/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": { "type": "string" }
+        }
+      ],
+      "get": {
+        "summary": "Get a single project by ID",
+        "responses": { "200": { "description": "OK" } }
+      },
+      "put": {
+        "summary": "Update a project by ID",
+        "responses": { "204": { "description": "No Content" } }
+      },
+      "delete": {
+        "summary": "Delete a project by ID",
+        "responses": { "204": { "description": "No Content" } }
       }
     }
   }
