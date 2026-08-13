@@ -1,12 +1,8 @@
-const app = require('./server');
 const supertest = require('supertest');
-const request = supertest(app);
+// Point Supertest directly to your live deployed API
+const request = supertest('https://cse341-taskmanager.onrender.com');
 
 describe('Test Handlers', () => {
-  // Pause for 2 seconds to allow MongoDB to connect
-  beforeAll(async () => {
-    await new Promise(resolve => setTimeout(resolve, 2000));
-  });
 
   test('responds to /users', async () => {
     const res = await request.get('/users');
@@ -31,4 +27,5 @@ describe('Test Handlers', () => {
     expect(res.header['content-type']).toBe('application/json; charset=utf-8');
     expect(res.statusCode).toBe(200);
   });
+  
 });
