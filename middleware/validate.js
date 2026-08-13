@@ -1,34 +1,91 @@
-const { body, validationResult } = require('express-validator');
+const validator = require('../helpers/validate');
 
-const validator = (req, res, next) => {
-  const errors = validationResult(req);
-  if (errors.isEmpty()) {
-    return next();
-  }
-  return res.status(400).json({ errors: errors.array() });
+const saveTask = (req, res, next) => {
+  const validationRule = {
+    title: 'required|string',
+    description: 'required|string',
+    dueDate: 'required|string',
+    status: 'required|string',
+    priority: 'required|string',
+    projectId: 'required|string',
+    assignedUserId: 'required|string'
+  };
+  validator(req.body, validationRule, {}, (err, status) => {
+    if (!status) {
+      res.status(400).send({
+        success: false,
+        message: 'Validation failed',
+        data: err
+      });
+    } else {
+      next();
+    }
+  });
 };
 
-const saveUser = [
-  body('username').notEmpty().withMessage('Username is required'),
-  body('email').isEmail().withMessage('Valid email is required'),
-  validator
-];
+const saveCategory = (req, res, next) => {
+  const validationRule = {
+    name: 'required|string',
+    color: 'required|string'
+  };
+  validator(req.body, validationRule, {}, (err, status) => {
+    if (!status) {
+      res.status(400).send({
+        success: false,
+        message: 'Validation failed',
+        data: err
+      });
+    } else {
+      next();
+    }
+  });
+};
 
-const saveProject = [
-  body('title').notEmpty().withMessage('Title is required'),
-  body('description').notEmpty().withMessage('Description is required'),
-  validator
-];
+// NEW: Validation for Users
+const saveUser = (req, res, next) => {
+  const validationRule = {
+    username: 'required|string',
+    email: 'required|email',
+    firstName: 'required|string',
+    lastName: 'required|string'
+  };
+  validator(req.body, validationRule, {}, (err, status) => {
+    if (!status) {
+      res.status(400).send({
+        success: false,
+        message: 'Validation failed',
+        data: err
+      });
+    } else {
+      next();
+    }
+  });
+};
 
-const saveTask = [
-  body('title').notEmpty().withMessage('Title is required'),
-  body('status').isIn(['pending', 'in-progress', 'completed']).withMessage('Status must be pending, in-progress, or completed'),
-  validator
-];
+// NEW: Validation for Projects
+const saveProject = (req, res, next) => {
+  const validationRule = {
+    title: 'required|string',
+    description: 'required|string',
+    ownerId: 'required|string',
+    startDate: 'required|string'
+  };
+  validator(req.body, validationRule, {}, (err, status) => {
+    if (!status) {
+      res.status(400).send({
+        success: false,
+        message: 'Validation failed',
+        data: err
+      });
+    } else {
+      next();
+    }
+  });
+};
 
-const saveCategory = [
-  body('name').notEmpty().withMessage('Category name is required'),
-  validator
-];
-
-module.exports = { saveUser, saveProject, saveTask, saveCategory };
+module.exports = {
+  saveTask,
+  saveCategory,
+  saveUser,
+  saveProject
+};
