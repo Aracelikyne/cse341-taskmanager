@@ -31,7 +31,6 @@ const getSingle = async (req, res) => {
 
 const createTask = async (req, res) => {
   try {
-    // 7+ fields for the rubric requirement
     const task = {
       title: req.body.title,
       description: req.body.description,

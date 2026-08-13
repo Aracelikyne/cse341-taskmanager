@@ -8,8 +8,8 @@ const dummyId = '650c1f1e1c9d440000a1b1c1';
 describe('Test Handlers', () => {
   // Pause for 2 seconds to allow MongoDB to connect
   beforeAll(async () => {
-    await new Promise(resolve => setTimeout(resolve, 2000));
-  });
+    await new Promise(resolve => setTimeout(resolve, 5000));
+  }, 10000);
 
   // ==========================
   // USERS TESTS
